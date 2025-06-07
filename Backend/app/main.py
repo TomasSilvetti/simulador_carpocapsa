@@ -1,4 +1,4 @@
-from app.core.simulation import simulation
+from core.simulation import simulation
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -25,3 +25,8 @@ def generate_simulation(hectares: float, tcs_per_hectare: float, insecticide_per
     data = simulation(hectares, tcs_per_hectare, insecticide_per_hectare, labor_cost_per_hectare, monitoring_cost_per_hectare, tramps, insecticide_eggs, prev_larvaes)
     print(f"Datos enviados: {data}")
     return data
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
