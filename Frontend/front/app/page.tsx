@@ -159,14 +159,16 @@ export default function HomePage() {
               loadingDiv.style.zIndex = "9999";
               document.body.appendChild(loadingDiv);
               await fetch(
-                `http://localhost:8000/reportes?${params.toString()}`,
+                `https://simulador-carpocapsa.onrender.com/reportes?${params.toString()}`,
                 {
                   method: "POST",
                 }
               ).then((res) =>
                 res.json().then((data) => {
                   console.log("Datos reales del backend:", data);
-                  localStorage.setItem(
+                  // Removemos localStorage ya que no funciona en Netlify
+                  // En su lugar, usaremos sessionStorage o pasaremos los datos por URL
+                  sessionStorage.setItem(
                     "resultadoSimulacion",
                     JSON.stringify(data)
                   );

@@ -434,14 +434,20 @@ export default function ReportesPage() {
   }, []);
 
   useEffect(() => {
-    const dataString = localStorage.getItem("resultadoSimulacion");
+    // Cambiado de localStorage a sessionStorage
+    const dataString = sessionStorage.getItem("resultadoSimulacion");
     if (dataString) {
       try {
         const parsed = JSON.parse(dataString) as MockData;
         setMockData(parsed);
       } catch (e) {
         console.error("Error al parsear JSON:", e);
+        // Si hay error, usar datos estáticos como fallback
+        setMockData(mockDataStatic);
       }
+    } else {
+      // Si no hay datos en sessionStorage, usar datos estáticos
+      setMockData(mockDataStatic);
     }
   }, []);
 
