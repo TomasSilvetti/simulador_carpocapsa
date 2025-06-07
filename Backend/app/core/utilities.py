@@ -1,7 +1,7 @@
 import math
 import numpy as np
-from app.core.exceptions import ApplyProduct, HighMalePercent
-import app.core.generators as generators
+from core.exceptions import ApplyProduct, HighMalePercent
+import core.generators as generators
 
 def simulate_tramps(hectares: int):
     #Simulate the number of tramps in a given area of hectares.

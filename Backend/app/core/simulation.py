@@ -1,6 +1,6 @@
-from app.core.MEF.mef import MEF
-import app.core.utilities as utilities
-import app.core.generators as generators
+from core.MEF.mef import MEF
+import core.utilities as utilities
+import core.generators as generators
 import numpy as np
 import json
 
