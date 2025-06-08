@@ -43,7 +43,6 @@ const mockDataStatic = {
       tempMax: 16.3,
       carpogradosDiarios: 8.55,
       carpogradosAcumulados: 265.05,
-      diasMes: 31,
     },
     {
       mes: "Septiembre",
@@ -51,7 +50,6 @@ const mockDataStatic = {
       tempMax: 19.4,
       carpogradosDiarios: 11.35,
       carpogradosAcumulados: 605.55,
-      diasMes: 30,
     },
     {
       mes: "Octubre",
@@ -59,7 +57,6 @@ const mockDataStatic = {
       tempMax: 22.8,
       carpogradosDiarios: 14.8,
       carpogradosAcumulados: 1064.35,
-      diasMes: 31,
     },
     {
       mes: "Noviembre",
@@ -67,7 +64,6 @@ const mockDataStatic = {
       tempMax: 26.4,
       carpogradosDiarios: 18.05,
       carpogradosAcumulados: 1606.85,
-      diasMes: 30,
     },
     {
       mes: "Diciembre",
@@ -75,7 +71,6 @@ const mockDataStatic = {
       tempMax: 29.3,
       carpogradosDiarios: 20.8,
       carpogradosAcumulados: 2251.65,
-      diasMes: 31,
     },
     {
       mes: "Enero",
@@ -83,7 +78,6 @@ const mockDataStatic = {
       tempMax: 30.7,
       carpogradosDiarios: 22.05,
       carpogradosAcumulados: 2935.2,
-      diasMes: 31,
     },
     {
       mes: "Febrero",
@@ -91,7 +85,6 @@ const mockDataStatic = {
       tempMax: 29.5,
       carpogradosDiarios: 20.9,
       carpogradosAcumulados: 3520.4,
-      diasMes: 28,
     },
     {
       mes: "Marzo",
@@ -99,7 +92,6 @@ const mockDataStatic = {
       tempMax: 26.3,
       carpogradosDiarios: 17.95,
       carpogradosAcumulados: 4076.85,
-      diasMes: 31,
     },
   ],
   aplicacionInsecticidas: [
@@ -132,45 +124,38 @@ const mockDataStatic = {
     {
       concepto: "Trampas de Confusión (4 unidades)",
       costoPorHectarea: 45.0,
-      areaTratada: 12,
       costoTotal: 540.0,
     },
     {
       concepto: "Insecticida (8 aplicaciones)",
       costoPorHectarea: 28.5,
-      areaTratada: 12,
       costoTotal: 342.0,
     },
     {
       concepto: "Mano de obra aplicación",
       costoPorHectarea: 15.0,
-      areaTratada: 12,
       costoTotal: 180.0,
     },
     {
       concepto: "Monitoreo semanal",
       costoPorHectarea: 8.0,
-      areaTratada: 12,
       costoTotal: 96.0,
     },
     {
       concepto: "Total Inversión",
       costoPorHectarea: 96.5,
-      areaTratada: 12,
       costoTotal: 1158.0,
       isTotal: true,
     },
     {
       concepto: "Pérdida estimada sin control",
       costoPorHectarea: 450.0,
-      areaTratada: 12,
       costoTotal: 5400.0,
       isLoss: true,
     },
     {
       concepto: "Ahorro Neto",
       costoPorHectarea: 353.5,
-      areaTratada: 12,
       costoTotal: 4242.0,
       isSaving: true,
     },
