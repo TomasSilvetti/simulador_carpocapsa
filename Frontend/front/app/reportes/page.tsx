@@ -35,158 +35,158 @@ type MockData = {
   }>;
 };
 
-const mockDataStatic = {
-  acumulacionCarpogrados: [
-    {
-      mes: "Agosto",
-      tempMin: 0.8,
-      tempMax: 16.3,
-      carpogradosDiarios: 8.55,
-      carpogradosAcumulados: 265.05,
-    },
-    {
-      mes: "Septiembre",
-      tempMin: 3.3,
-      tempMax: 19.4,
-      carpogradosDiarios: 11.35,
-      carpogradosAcumulados: 605.55,
-    },
-    {
-      mes: "Octubre",
-      tempMin: 6.8,
-      tempMax: 22.8,
-      carpogradosDiarios: 14.8,
-      carpogradosAcumulados: 1064.35,
-    },
-    {
-      mes: "Noviembre",
-      tempMin: 9.7,
-      tempMax: 26.4,
-      carpogradosDiarios: 18.05,
-      carpogradosAcumulados: 1606.85,
-    },
-    {
-      mes: "Diciembre",
-      tempMin: 12.3,
-      tempMax: 29.3,
-      carpogradosDiarios: 20.8,
-      carpogradosAcumulados: 2251.65,
-    },
-    {
-      mes: "Enero",
-      tempMin: 13.4,
-      tempMax: 30.7,
-      carpogradosDiarios: 22.05,
-      carpogradosAcumulados: 2935.2,
-    },
-    {
-      mes: "Febrero",
-      tempMin: 12.3,
-      tempMax: 29.5,
-      carpogradosDiarios: 20.9,
-      carpogradosAcumulados: 3520.4,
-    },
-    {
-      mes: "Marzo",
-      tempMin: 9.6,
-      tempMax: 26.3,
-      carpogradosDiarios: 17.95,
-      carpogradosAcumulados: 4076.85,
-    },
-  ],
-  aplicacionInsecticidas: [
-    {
-      fechaAplicacion: "28-29 Agosto",
-      generacion: "1ª",
-      diasAplicados: 2,
-      reduccionEsperada: 99.0,
-      poblacionPreTratamiento: "2,508 larvas",
-      poblacionPostTratamiento: "25 larvas",
-    },
-    {
-      fechaAplicacion: "18-19 Septiembre",
-      generacion: "2ª",
-      diasAplicados: 2,
-      reduccionEsperada: 99.0,
-      poblacionPreTratamiento: "4,092 larvas",
-      poblacionPostTratamiento: "41 larvas",
-    },
-    {
-      fechaAplicacion: "12-13 Diciembre",
-      generacion: "3ª",
-      diasAplicados: 2,
-      reduccionEsperada: 99.0,
-      poblacionPreTratamiento: "8,398 larvas",
-      poblacionPostTratamiento: "84 larvas",
-    },
-  ],
-  analisisEconomico: [
-    {
-      concepto: "Trampas de Confusión (4 unidades)",
-      costoPorHectarea: 45.0,
-      costoTotal: 540.0,
-    },
-    {
-      concepto: "Insecticida (8 aplicaciones)",
-      costoPorHectarea: 28.5,
-      costoTotal: 342.0,
-    },
-    {
-      concepto: "Mano de obra aplicación",
-      costoPorHectarea: 15.0,
-      costoTotal: 180.0,
-    },
-    {
-      concepto: "Monitoreo semanal",
-      costoPorHectarea: 8.0,
-      costoTotal: 96.0,
-    },
-    {
-      concepto: "Total Inversión",
-      costoPorHectarea: 96.5,
-      costoTotal: 1158.0,
-      isTotal: true,
-    },
-    {
-      concepto: "Pérdida estimada sin control",
-      costoPorHectarea: 450.0,
-      costoTotal: 5400.0,
-      isLoss: true,
-    },
-    {
-      concepto: "Ahorro Neto",
-      costoPorHectarea: 353.5,
-      costoTotal: 4242.0,
-      isSaving: true,
-    },
-  ],
-  eficaciaPrograma: [
-    {
-      metrica: "Población final de larvas",
-      sinControl: "15,843",
-      conControl: "276",
-      reduccion: "98.3%",
-    },
-    {
-      metrica: "Población final de adultos",
-      sinControl: "4,483",
-      conControl: "15",
-      reduccion: "99.7%",
-    },
-    {
-      metrica: "Frutos dañados estimados",
-      sinControl: "1,267",
-      conControl: "22",
-      reduccion: "98.3%",
-    },
-    {
-      metrica: "Cumplimiento umbral SENASA",
-      sinControl: "15%",
-      conControl: "85%",
-      reduccion: "+70%",
-    },
-  ],
-};
+// const mockDataStatic = {
+//   acumulacionCarpogrados: [
+//     {
+//       mes: "Agosto",
+//       tempMin: 0.8,
+//       tempMax: 16.3,
+//       carpogradosDiarios: 8.55,
+//       carpogradosAcumulados: 265.05,
+//     },
+//     {
+//       mes: "Septiembre",
+//       tempMin: 3.3,
+//       tempMax: 19.4,
+//       carpogradosDiarios: 11.35,
+//       carpogradosAcumulados: 605.55,
+//     },
+//     {
+//       mes: "Octubre",
+//       tempMin: 6.8,
+//       tempMax: 22.8,
+//       carpogradosDiarios: 14.8,
+//       carpogradosAcumulados: 1064.35,
+//     },
+//     {
+//       mes: "Noviembre",
+//       tempMin: 9.7,
+//       tempMax: 26.4,
+//       carpogradosDiarios: 18.05,
+//       carpogradosAcumulados: 1606.85,
+//     },
+//     {
+//       mes: "Diciembre",
+//       tempMin: 12.3,
+//       tempMax: 29.3,
+//       carpogradosDiarios: 20.8,
+//       carpogradosAcumulados: 2251.65,
+//     },
+//     {
+//       mes: "Enero",
+//       tempMin: 13.4,
+//       tempMax: 30.7,
+//       carpogradosDiarios: 22.05,
+//       carpogradosAcumulados: 2935.2,
+//     },
+//     {
+//       mes: "Febrero",
+//       tempMin: 12.3,
+//       tempMax: 29.5,
+//       carpogradosDiarios: 20.9,
+//       carpogradosAcumulados: 3520.4,
+//     },
+//     {
+//       mes: "Marzo",
+//       tempMin: 9.6,
+//       tempMax: 26.3,
+//       carpogradosDiarios: 17.95,
+//       carpogradosAcumulados: 4076.85,
+//     },
+//   ],
+//   aplicacionInsecticidas: [
+//     {
+//       fechaAplicacion: "28-29 Agosto",
+//       generacion: "1ª",
+//       diasAplicados: 2,
+//       reduccionEsperada: 99.0,
+//       poblacionPreTratamiento: "2,508 larvas",
+//       poblacionPostTratamiento: "25 larvas",
+//     },
+//     {
+//       fechaAplicacion: "18-19 Septiembre",
+//       generacion: "2ª",
+//       diasAplicados: 2,
+//       reduccionEsperada: 99.0,
+//       poblacionPreTratamiento: "4,092 larvas",
+//       poblacionPostTratamiento: "41 larvas",
+//     },
+//     {
+//       fechaAplicacion: "12-13 Diciembre",
+//       generacion: "3ª",
+//       diasAplicados: 2,
+//       reduccionEsperada: 99.0,
+//       poblacionPreTratamiento: "8,398 larvas",
+//       poblacionPostTratamiento: "84 larvas",
+//     },
+//   ],
+//   analisisEconomico: [
+//     {
+//       concepto: "Trampas de Confusión (4 unidades)",
+//       costoPorHectarea: 45.0,
+//       costoTotal: 540.0,
+//     },
+//     {
+//       concepto: "Insecticida (8 aplicaciones)",
+//       costoPorHectarea: 28.5,
+//       costoTotal: 342.0,
+//     },
+//     {
+//       concepto: "Mano de obra aplicación",
+//       costoPorHectarea: 15.0,
+//       costoTotal: 180.0,
+//     },
+//     {
+//       concepto: "Monitoreo semanal",
+//       costoPorHectarea: 8.0,
+//       costoTotal: 96.0,
+//     },
+//     {
+//       concepto: "Total Inversión",
+//       costoPorHectarea: 96.5,
+//       costoTotal: 1158.0,
+//       isTotal: true,
+//     },
+//     {
+//       concepto: "Pérdida estimada sin control",
+//       costoPorHectarea: 450.0,
+//       costoTotal: 5400.0,
+//       isLoss: true,
+//     },
+//     {
+//       concepto: "Ahorro Neto",
+//       costoPorHectarea: 353.5,
+//       costoTotal: 4242.0,
+//       isSaving: true,
+//     },
+//   ],
+//   eficaciaPrograma: [
+//     {
+//       metrica: "Población final de larvas",
+//       sinControl: "15,843",
+//       conControl: "276",
+//       reduccion: "98.3%",
+//     },
+//     {
+//       metrica: "Población final de adultos",
+//       sinControl: "4,483",
+//       conControl: "15",
+//       reduccion: "99.7%",
+//     },
+//     {
+//       metrica: "Frutos dañados estimados",
+//       sinControl: "1,267",
+//       conControl: "22",
+//       reduccion: "98.3%",
+//     },
+//     {
+//       metrica: "Cumplimiento umbral SENASA",
+//       sinControl: "15%",
+//       conControl: "85%",
+//       reduccion: "+70%",
+//     },
+//   ],
+// };
 
 export default function ReportesPage() {
   const [mockData, setMockData] = useState<MockData | null>(null);
