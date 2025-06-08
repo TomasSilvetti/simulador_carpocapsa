@@ -201,11 +201,11 @@ export default function ReportesPage() {
       } catch (e) {
         console.error("Error al parsear JSON:", e);
         // Si hay error, usar datos estáticos como fallback
-        setMockData(mockDataStatic);
+        //setMockData(mockDataStatic);
       }
     } else {
       // Si no hay datos en sessionStorage, usar datos estáticos
-      setMockData(mockDataStatic);
+      //setMockData(mockDataStatic);
     }
   }, []);
 
