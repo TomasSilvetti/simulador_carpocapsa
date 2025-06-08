@@ -22,7 +22,7 @@ def simulation(hectares: float,
     days_to_simulate = 243 #Represents 8 months, from August to March
     day = 1
     acumulated_carpogrades = 0
-    larvaes = prev_larvaes if prev_larvaes is not None else 500  # Initial larvaes
+    larvaes = prev_larvaes if prev_larvaes is not None else 500 * hectares
     larvaes_wo_control = 0
     adults = 0
     adults_wo_control = 0
@@ -39,6 +39,7 @@ def simulation(hectares: float,
     plague_state = "Larvas diapausantes"
     act_month = ""    
     prev_month = ""
+    months = 0
     data = {
         "aplicacionInsecticidas": [],
         "acumulacionCarpogrados": [],
@@ -95,6 +96,7 @@ def simulation(hectares: float,
 
     mean_temperatures_mef = MEF("Agosto", mean_temperatures_table, 9.6, 26.3)
     carpogrades_mef = MEF("Larvas diapausantes", carpogrades_table)
+    prev_month = mean_temperatures_mef.state
 
     # Main simulation loop
     while day <= days_to_simulate:
@@ -110,10 +112,11 @@ def simulation(hectares: float,
                 "mes": act_month,
                 "tempMin": mean_temperatures_mef.min_mean,
                 "tempMax": mean_temperatures_mef.max_mean,
-                "carpogradosDiarios": acumulated_carpogrades / 31,
-                "carpogradosAcumulados": acumulated_carpogrades,
+                "carpogradosDiarios": round((acumulated_carpogrades / 31), 2),
+                "carpogradosAcumulados": round(acumulated_carpogrades),
                 })
             prev_month = act_month
+            months += 1
 
         #Durante el dia mido tres veces la temperatura
         for i in range(3):
@@ -168,8 +171,9 @@ def simulation(hectares: float,
             if days_applied < 2:
                 prev_larvaes = larvaes
                 larvaes = utilities.preventive_measures(larvaes, days_applied)
+                
                 data["aplicacionInsecticidas"].append(    {
-                        "fechaAplicacion": day,
+                        "fechaAplicacion": f"{day - (months * 30)} de {mean_temperatures_mef.state}",
                         "generacion": generation,
                         "reduccionEsperada": 90.0,
                         "poblacionPreTratamiento": prev_larvaes,
@@ -186,7 +190,7 @@ def simulation(hectares: float,
         day += 1
 
     data["eficaciaPrograma"] = [
-    { "metrica": "Población final de larvas", "sinControl": larvaes_wo_control, "conControl": larvaes, "reduccion": (larvaes_wo_control - larvaes) / larvaes_wo_control * 100 if larvaes_wo_control > 0 else 0 },
+    { "metrica": "Población final de larvas diapausantes estimado", "sinControl": (larvaes_wo_control if larvaes_wo_control else (adults_wo_control * 44)), "conControl": larvaes, "reduccion": (larvaes_wo_control - larvaes) / larvaes_wo_control * 100 if larvaes_wo_control > 0 else (adults_wo_control * 44) - larvaes / (adults_wo_control * 44) * 100 },
     { "metrica": "Población final de adultos", "sinControl": adults_wo_control, "conControl": adults, "reduccion": (adults_wo_control - adults) / adults_wo_control * 100 if adults_wo_control > 0 else 0 },
     { "metrica": "Frutos dañados estimados", "sinControl": larvaes_wo_control * 0.75, "conControl": larvaes * 0.75, "reduccion": (larvaes_wo_control * 0.75 - larvaes * 0.75) / (larvaes_wo_control * 0.75) * 100 if (larvaes_wo_control * 0.75) > 0 else 0 },
     { "metrica": "Cumplimiento umbral SENASA", "sinControl": measures_read * tramps, "conControl": 1 - (alarms/(measures_read * tramps)), "reduccion": (alarms / (measures_read * tramps)) * 100 if (measures_read * tramps) > 0 else 0 },

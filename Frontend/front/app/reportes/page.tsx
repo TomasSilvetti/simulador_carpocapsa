@@ -11,12 +11,10 @@ type MockData = {
     tempMax: number;
     carpogradosDiarios: number;
     carpogradosAcumulados: number;
-    diasMes: number;
   }>;
   aplicacionInsecticidas: Array<{
     fechaAplicacion: string;
     generacion: string;
-    diasAplicados: number;
     reduccionEsperada: number;
     poblacionPreTratamiento: string;
     poblacionPostTratamiento: string;
@@ -24,7 +22,6 @@ type MockData = {
   analisisEconomico: Array<{
     concepto: string;
     costoPorHectarea: number;
-    areaTratada: number;
     costoTotal: number;
     isTotal?: boolean;
     isLoss?: boolean;
@@ -257,9 +254,8 @@ export default function ReportesPage() {
                 <th>Mes</th>
                 <th>Temp. Min (°C)</th>
                 <th>Temp. Max (°C)</th>
-                <th>Carpogrados Diarios</th>
+                <th>Promedio Carpogrados Diarios</th>
                 <th>Carpogrados Acumulados</th>
-                <th>Días del Mes</th>
               </tr>
             </thead>
             <tbody>
@@ -270,7 +266,6 @@ export default function ReportesPage() {
                   <td>{row.tempMax}</td>
                   <td>{row.carpogradosDiarios}</td>
                   <td className="bold">{row.carpogradosAcumulados}</td>
-                  <td>{row.diasMes}</td>
                 </tr>
               ))}
             </tbody>
@@ -286,7 +281,6 @@ export default function ReportesPage() {
               <tr>
                 <th>Fecha Aplicación</th>
                 <th>Generación</th>
-                <th>Días Aplicados</th>
                 <th>Reducción Esperada (%)</th>
                 <th>Población Pre-Tratamiento</th>
                 <th>Población Post-Tratamiento</th>
@@ -297,7 +291,6 @@ export default function ReportesPage() {
                 <tr key={index}>
                   <td className="bold">{row.fechaAplicacion}</td>
                   <td>{row.generacion}</td>
-                  <td>{row.diasAplicados}</td>
                   <td>
                     <span className="chip">{row.reduccionEsperada}%</span>
                   </td>
@@ -320,7 +313,6 @@ export default function ReportesPage() {
               <tr>
                 <th>Concepto</th>
                 <th>Costo por Hectárea (USD)</th>
-                <th>Área Tratada (ha)</th>
                 <th>Costo Total (USD)</th>
               </tr>
             </thead>
@@ -340,7 +332,6 @@ export default function ReportesPage() {
                 >
                   <td className="bold">{row.concepto}</td>
                   <td>${row.costoPorHectarea.toFixed(2)}</td>
-                  <td>{row.areaTratada}</td>
                   <td
                     className={`${
                       row.isSaving ? "success" : row.isLoss ? "error" : ""
