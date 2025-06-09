@@ -47,22 +47,6 @@ def simulation(hectares: float,
         "eficaciaPrograma": [],
     }
 
-    data["analisisEconomico"] = [
-    { "concepto": "Trampas de Confusión", "costoPorHectarea": tcs_per_hectare, "areaTratada": hectares, "costoTotal": hectares * tcs_per_hectare },
-    { "concepto": "Insecticida", "costoPorHectarea": insecticide_per_hectare, "areaTratada": hectares, "costoTotal": hectares * insecticide_per_hectare },
-    { "concepto": "Mano de obra aplicación", "costoPorHectarea": labor_cost_per_hectare, "areaTratada": hectares, "costoTotal": hectares * labor_cost_per_hectare },
-    { "concepto": "Monitoreo semanal", "costoPorHectarea": monitoring_cost_per_hectare, "areaTratada": hectares, "costoTotal": hectares * monitoring_cost_per_hectare },
-    { "concepto": "Total Inversión", "costoPorHectarea": tcs_per_hectare + insecticide_per_hectare + labor_cost_per_hectare + monitoring_cost_per_hectare, "areaTratada": hectares, "costoTotal": hectares * (tcs_per_hectare + insecticide_per_hectare + labor_cost_per_hectare + monitoring_cost_per_hectare), "isTotal": True },
-    {
-      "concepto": "Pérdida estimada sin control",
-      "costoPorHectarea": 450.0,
-      "areaTratada": 12,
-      "costoTotal": 5400.0,
-      "isLoss": True,
-    },
-    { "concepto": "Ahorro Neto", "costoPorHectarea": 353.5, "areaTratada": 12, "costoTotal": 4242.0, "isSaving": True },
-  ]
-
     # Simulate the carpogrades to start the third-generation moths
     u = generators.parte_central_cuadrado(generators.get_seed(5), 5, 1)
     third_generation_carpogrades = 750 + 100 * u["resultado"][0]
@@ -114,6 +98,7 @@ def simulation(hectares: float,
                 "tempMax": mean_temperatures_mef.max_mean,
                 "carpogradosDiarios": round((acumulated_carpogrades / 31), 2),
                 "carpogradosAcumulados": round(acumulated_carpogrades),
+                "diasMes": 31
                 })
             prev_month = act_month
             months += 1
@@ -175,6 +160,7 @@ def simulation(hectares: float,
                 data["aplicacionInsecticidas"].append(    {
                         "fechaAplicacion": f"{day - (months * 30)} de {mean_temperatures_mef.state}",
                         "generacion": generation,
+                        "diasAplicados": days_applied + 1,
                         "reduccionEsperada": 90.0,
                         "poblacionPreTratamiento": prev_larvaes,
                         "poblacionPostTratamiento": larvaes,
@@ -189,11 +175,27 @@ def simulation(hectares: float,
         # input("Press Enter to continue...")
         day += 1
 
+        data["analisisEconomico"] = [
+    { "concepto": "Trampas de Confusión", "costoPorHectarea": tcs_per_hectare, "areaTratada": hectares, "costoTotal": hectares * tcs_per_hectare },
+    { "concepto": "Insecticida", "costoPorHectarea": insecticide_per_hectare, "areaTratada": hectares, "costoTotal": hectares * insecticide_per_hectare },
+    { "concepto": "Mano de obra aplicación", "costoPorHectarea": labor_cost_per_hectare, "areaTratada": hectares, "costoTotal": hectares * labor_cost_per_hectare },
+    { "concepto": "Monitoreo semanal", "costoPorHectarea": monitoring_cost_per_hectare, "areaTratada": hectares, "costoTotal": hectares * monitoring_cost_per_hectare },
+    { "concepto": "Total Inversión", "costoPorHectarea": tcs_per_hectare + insecticide_per_hectare + labor_cost_per_hectare + monitoring_cost_per_hectare, "areaTratada": hectares, "costoTotal": hectares * (tcs_per_hectare + insecticide_per_hectare + labor_cost_per_hectare + monitoring_cost_per_hectare), "isTotal": True },
+    {
+      "concepto": "Pérdida estimada sin control",
+      "costoPorHectarea": 30 * 0.05 * 2, #Kilos de fruta (Estimacion para 1000 arboles/ha) * frutos afectados por carpocapsa sin control * precio kg de manzana en jumbo
+      "areaTratada": hectares,
+      "costoTotal": (30 * 0.05 * 2) * hectares, #Kilos de fruta (Estimacion para 1000 arboles/ha) * frutos afectados por carpocapsa sin control * precio kg de manzana en jumbo * hectareas
+      "isLoss": True,
+    },
+    { "concepto": "Ahorro Neto", "costoPorHectarea": (30 * 0.05 * 2) - (tcs_per_hectare + insecticide_per_hectare + labor_cost_per_hectare + monitoring_cost_per_hectare), "areaTratada": hectares, "costoTotal": ((30 * 0.05 * 2) - (tcs_per_hectare + insecticide_per_hectare + labor_cost_per_hectare + monitoring_cost_per_hectare)) * hectares, "isSaving": True },
+  ]
+
     data["eficaciaPrograma"] = [
-    { "metrica": "Población final de larvas diapausantes estimado", "sinControl": (larvaes_wo_control if larvaes_wo_control else (adults_wo_control * 44)), "conControl": larvaes, "reduccion": (larvaes_wo_control - larvaes) / larvaes_wo_control * 100 if larvaes_wo_control > 0 else (adults_wo_control * 44) - larvaes / (adults_wo_control * 44) * 100 },
-    { "metrica": "Población final de adultos", "sinControl": adults_wo_control, "conControl": adults, "reduccion": (adults_wo_control - adults) / adults_wo_control * 100 if adults_wo_control > 0 else 0 },
-    { "metrica": "Frutos dañados estimados", "sinControl": larvaes_wo_control * 0.75, "conControl": larvaes * 0.75, "reduccion": (larvaes_wo_control * 0.75 - larvaes * 0.75) / (larvaes_wo_control * 0.75) * 100 if (larvaes_wo_control * 0.75) > 0 else 0 },
-    { "metrica": "Cumplimiento umbral SENASA", "sinControl": measures_read * tramps, "conControl": 1 - (alarms/(measures_read * tramps)), "reduccion": (alarms / (measures_read * tramps)) * 100 if (measures_read * tramps) > 0 else 0 },
+    { "metrica": "Población final de larvas diapausantes estimado", "sinControl": (larvaes_wo_control if larvaes_wo_control else (adults_wo_control * 44)), "conControl": larvaes, "reduccion": round(((larvaes_wo_control - larvaes) / larvaes_wo_control * 100), 2) if larvaes_wo_control > 0 else (adults_wo_control * 44) - larvaes / (adults_wo_control * 44) * 100 },
+    { "metrica": "Población final de adultos", "sinControl": adults_wo_control, "conControl": adults, "reduccion": round(((adults_wo_control - adults) / adults_wo_control * 100), 2) if adults_wo_control > 0 else 0 },
+    { "metrica": "Frutos dañados estimados", "sinControl": larvaes_wo_control * 0.75, "conControl": larvaes * 0.75, "reduccion": round(((larvaes_wo_control * 0.75 - larvaes * 0.75) / (larvaes_wo_control * 0.75) * 100), 2) if (larvaes_wo_control * 0.75) > 0 else 0 },
+    { "metrica": "Cumplimiento umbral SENASA", "sinControl": 100, "conControl": round((alarms/(measures_read * tramps)), 2), "reduccion": round(((1 - (alarms / (measures_read * tramps)) * 100)), 2) if (measures_read * tramps) > 0 else 0 },
     ]
 
     return data
