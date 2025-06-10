@@ -22,10 +22,7 @@ def simulation(hectares: float,
     days_to_simulate = 243 #Represents 8 months, from August to March
     day = 1
     acumulated_carpogrades = 0
-    if isinstance(prev_larvaes, int):
-        larvaes = prev_larvaes
-    else:
-        larvaes = 500 * hectares
+    larvaes = prev_larvaes
     larvaes_wo_control = 0
     adults = 0
     adults_wo_control = 0
