@@ -11,7 +11,7 @@ def simulation(hectares: float,
                monitoring_cost_per_hectare: float,
                tramps:int | None = None, 
                insecticide_eggs: bool = True, 
-               prev_larvaes: int = None) -> str:
+               prev_larvaes: int | None= None) -> str:
     """
     Simulate the number of tramps in a given area of hectares.
 
@@ -42,7 +42,7 @@ def simulation(hectares: float,
     months = 0
     kg_fruit_per_hectare = 30000  # Estimated kilos of fruit per hectare (for 1000 trees/ha)
     price_per_kg = 30  # Price per kg of fruit in jumbo (in local currency)
-    fruit_infested_per_hectare_wocontrol = 0.03  # Estimated percentage of fruit affected by carpocapsa without control
+    fruit_infested_per_hectare_wocontrol = 0.02  # Estimated percentage of fruit affected by carpocapsa without control
     data = {
         "aplicacionInsecticidas": [],
         "acumulacionCarpogrados": [],
