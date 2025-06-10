@@ -22,7 +22,7 @@ async def read_root():
     return {"message": "Bienvenido a la aplicación FastAPI"}
 
 @app.post("/reportes")
-def generate_simulation(hectares: float, tcs_per_hectare: float, insecticide_per_hectare: float, labor_cost_per_hectare: float, monitoring_cost_per_hectare: float, tramps:Optional[str] = Query(default=None), insecticide_eggs: bool | None, prev_larvaes:Optional[str] = Query(default=None)):
+def generate_simulation(hectares: float, tcs_per_hectare: float, insecticide_per_hectare: float, labor_cost_per_hectare: float, monitoring_cost_per_hectare: float, insecticide_eggs: bool | None, tramps:Optional[str] = Query(default=None), prev_larvaes:Optional[str] = Query(default=None)):
     if isinstance(prev_larvaes, str):
         prev_larvaes = 500 * hectares
     if isinstance(tramps, str):
