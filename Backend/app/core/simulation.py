@@ -9,9 +9,9 @@ def simulation(hectares: float,
                insecticide_per_hectare: float,
                labor_cost_per_hectare: float,
                monitoring_cost_per_hectare: float,
+               prev_larvaes: int | str, 
                tramps:int | None = None, 
-               insecticide_eggs: bool = True, 
-               prev_larvaes: int | None= None) -> str:
+               insecticide_eggs: bool = True) -> str:
     """
     Simulate the number of tramps in a given area of hectares.
 
@@ -22,7 +22,10 @@ def simulation(hectares: float,
     days_to_simulate = 243 #Represents 8 months, from August to March
     day = 1
     acumulated_carpogrades = 0
-    larvaes = prev_larvaes if prev_larvaes is not None else 500 * hectares
+    if isinstance(prev_larvaes, int):
+        larvaes = prev_larvaes
+    else:
+        larvaes = 500 * hectares
     larvaes_wo_control = 0
     adults = 0
     adults_wo_control = 0
